@@ -1,7 +1,9 @@
 from PyQt5.QtWidgets import QWidget
 from PyQt5.Qt import QPixmap, QPainter, QPoint, QPaintEvent, QMouseEvent, QPen, QColor, QSize
 from PyQt5.QtCore import Qt
-from PIL import Image, ImageQt
+import PyQt5
+from PIL import Image, ImageQt, ImageOps, ImageFilter
+import time
 class PaintBoard(QWidget):
     def __init__(self, Parent=None):
         '''
@@ -65,16 +67,48 @@ class PaintBoard(QWidget):
         image = self.__board.toImage()
         return image
 
+    def ImageConverse(self):
+        if self.__IsEmpty:
+            return
+
+        ori_img = Image.fromqimage(self.__board.toImage())
+        inverted_image = ImageOps.invert(ori_img)
+        temp_name = "./temp/{}.png".format(str(time.time()))
+        inverted_image.save(temp_name)
+        self.__board.load(temp_name)
+        self.__board = self.__board.scaled(QSize(800,600), Qt.KeepAspectRatio)
+        self.update()
+    
+    def ImageBlur(self):
+        if self.__IsEmpty:
+            return
+        ori_img = Image.fromqimage(self.__board.toImage())
+        blured_image =  ori_img.filter(ImageFilter.BLUR)
+        temp_name = "./temp/{}.png".format(str(time.time()))
+        blured_image.save(temp_name)
+        self.__board.load(temp_name)
+        self.__board = self.__board.scaled(QSize(800,600), Qt.KeepAspectRatio)
+        self.update()
+    
+    def ImageEmboss(self):
+        if self.__IsEmpty:
+            return
+        ori_img = Image.fromqimage(self.__board.toImage())
+        blured_image =  ori_img.filter(ImageFilter.EMBOSS)
+        temp_name = "./temp/{}.png".format(str(time.time()))
+        blured_image.save(temp_name)
+        self.__board.load(temp_name)
+        self.__board = self.__board.scaled(QSize(800,600), Qt.KeepAspectRatio)
+        self.update()
+
     def LoadLocalFile(self, filePath):
         self.__board.load(filePath)
         self.__board = self.__board.scaled(QSize(800,600), Qt.KeepAspectRatio)
         print(self.__board.size())
-        # image = ImageQt.ImageQt(Image.open(filePath))
-        # self.__board.fill(image)
         self.update()
         self.__IsEmpty = False
 
-    def paintEvent(self, paintEvent):
+    def paintEvent(self, QPaintEvent):
         #绘图事件
         #绘图时必须使用QPainter的实例，此处为__painter
         #绘图在begin()函数与end()函数间进行

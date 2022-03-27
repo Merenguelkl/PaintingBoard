@@ -76,6 +76,24 @@ class MainWidget(QWidget):
         splitter2 = QSplitter(self) #占位符
         sub_layout.addWidget(splitter2)
 
+        self.__cbtn_Converse = QPushButton("反转")
+        self.__cbtn_Converse.setParent(self)
+        self.__cbtn_Converse.clicked.connect(self.on_cbtn_Converse_clicked)
+        sub_layout.addWidget(self.__cbtn_Converse)
+
+        self.__cbtn_Blur = QPushButton("模糊")
+        self.__cbtn_Blur.setParent(self)
+        self.__cbtn_Blur.clicked.connect(self.on_cbtn_Blur_clicked)
+        sub_layout.addWidget(self.__cbtn_Blur)
+
+        self.__cbtn_Emboss = QPushButton("浮雕")
+        self.__cbtn_Emboss.setParent(self)
+        self.__cbtn_Emboss.clicked.connect(self.on_cbtn_Emboss_clicked)
+        sub_layout.addWidget(self.__cbtn_Emboss)
+
+        splitter3 = QSplitter(self) #占位符
+        sub_layout.addWidget(splitter3)
+
         self.__label_penThickness = QLabel(self)
         self.__label_penThickness.setText("画笔粗细")
         self.__label_penThickness.setFixedHeight(20)
@@ -147,6 +165,24 @@ class MainWidget(QWidget):
         self.__paintBoard.BarrelMode = True
         self.__paintBoard.setCursor(Qt.CrossCursor)
         print("Barrel Mode start!")
+    
+    def on_cbtn_Converse_clicked(self):
+        self.__paintBoard.PencilMode = False 
+        self.__paintBoard.EraserMode = False 
+        self.__paintBoard.BarrelMode = False
+        self.__paintBoard.ImageConverse()
+
+    def on_cbtn_Blur_clicked(self):
+        self.__paintBoard.PencilMode = False 
+        self.__paintBoard.EraserMode = False 
+        self.__paintBoard.BarrelMode = False
+        self.__paintBoard.ImageBlur()
+
+    def on_cbtn_Emboss_clicked(self):
+        self.__paintBoard.PencilMode = False 
+        self.__paintBoard.EraserMode = False 
+        self.__paintBoard.BarrelMode = False
+        self.__paintBoard.ImageEmboss()
 
     # change pencil thickness
     def on_PenThicknessChange(self):
