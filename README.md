@@ -34,4 +34,18 @@ Reverse
 
 ### Example
 
-to be added ...
+#### painter
+
+![paintr](.\examples\paintr.png)
+
+#### Inverse
+
+![invert](.\examples\invert.png)
+
+#### blur
+
+![blur](.\examples\blur.png)
+
+#### emboss
+
+![emboss](.\examples\emboss.png)
