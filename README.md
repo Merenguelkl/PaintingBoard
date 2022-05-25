@@ -36,16 +36,16 @@ Reverse
 
 #### painter
 
-![paintr](.\examples\paintr.png)
+![](https://pic.imgdb.cn/item/628e075e09475431298d23f4.png)
 
 #### Inverse
 
-![invert](.\examples\invert.png)
+![](https://pic.imgdb.cn/item/628e075e09475431298d23eb.png)
 
 #### blur
 
-![blur](.\examples\blur.png)
+![](https://pic.imgdb.cn/item/628e073609475431298cea32.png)
 
 #### emboss
 
-![emboss](.\examples\emboss.png)
+![](https://pic.imgdb.cn/item/628e075e09475431298d23e6.png)
